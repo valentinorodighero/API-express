@@ -1,0 +1,25 @@
+{
+  "name": "api-express",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valentinorodighero/API-express.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/valentinorodighero/API-express/issues"
+  },
+  "homepage": "https://github.com/valentinorodighero/API-express#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
