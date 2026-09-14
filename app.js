@@ -32,7 +32,18 @@ app.get('/usuarios/:id', (req, res) => {
     return res.status(404).json({ error: 'Usuário não encontrado' });
   }
   res.status(200).json(usuario);
-});-
+});
+
+app.get('/usuarios/busca', (req, res) => {
+  const { nome } = req.query;
+  const resultado = usuarios.filter(u => 
+    u.nome.toLowerCase().includes((nome || '').toLowerCase()));
+  res.json(resultado);
+});
+
+app.use('*', (req, res) => {
+  res.status(404).json({ error: 'Rota não encontrada' });
+});
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
