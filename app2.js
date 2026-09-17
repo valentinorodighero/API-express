@@ -7,7 +7,7 @@ const tarefas = [
     { id: 3, titulo: 'Fazer exercícios', concluida: false }
 ]
 
-  app.use(express.json());
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('API de tarefas no ar');
@@ -32,7 +32,24 @@ app.get('/tarefas?concluida=true', (req, res) => {
   res.json(tarefasFiltradas);
 });
 
-app.post('/tarefas', (req, res) => {
+function autenticar (req, res, next) {
+  console.log('Autenticado com sucesso');
+  next();
+};
+
+function validarCorpo (req, res, next) {
+  if(!req.body.titulo || req.body.titulo.trim() === '') {
+    return res.status(400).send({ error: 'O campo "titulo" é obrigatório' });
+  }
+  next();
+}
+
+function registrarLog (req, res, next) {
+  console.log(`Ação realizada: ${req.method} ${req.originalUrl}`);
+  next();
+}
+
+app.post('/tarefas', [autenticar, validarCorpo, registrarLog], (req, res) => {
   const titulo = req.body.titulo;
   const novaTarefa = {
     id: tarefas.length + 1,
